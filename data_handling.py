@@ -3,11 +3,32 @@ import idx2numpy
 import random
 import pickle
 import os
+import urllib.request
+import gzip
+import shutil
+
+
+def download_and_extract():
+    print('downloading & extracting dataset\nthis will take just a couple of seconds')
+    urls = ['http://yann.lecun.com/exdb/mnist/train-images-idx3-ubyte.gz',
+            'http://yann.lecun.com/exdb/mnist/train-labels-idx1-ubyte.gz',
+            'http://yann.lecun.com/exdb/mnist/t10k-images-idx3-ubyte.gz',
+            'http://yann.lecun.com/exdb/mnist/t10k-labels-idx1-ubyte.gz']
+    for url in urls:
+        urllib.request.urlretrieve(url, url[33:])
+        file_name = url[33:-3]
+        with gzip.open(url[33:], 'rb') as f_in:
+            with open(file_name, 'wb') as f_out:
+                shutil.copyfileobj(f_in, f_out)
 
 
 def convert_idx_to_array(test_or_train):
-    idx_files = {'train': ('train-images.idx3-ubyte', 'train-labels.idx1-ubyte'),
-                 'test': ('t10k-images.idx3-ubyte', 't10k-labels.idx1-ubyte')}
+    idx_files = {'train': ('train-images-idx3-ubyte', 'train-labels-idx1-ubyte'),
+                 'test': ('t10k-images-idx3-ubyte', 't10k-labels-idx1-ubyte')}
+    if os.path.exists(idx_files[test_or_train][0]):
+        pass
+    else:
+        download_and_extract()
     images = idx2numpy.convert_from_file(idx_files[test_or_train][0])
     labels = idx2numpy.convert_from_file(idx_files[test_or_train][1])
     return images, labels
@@ -67,7 +88,7 @@ def shuffle_dataset(dataset):
 def assemble_dataset(train_or_test, add_random):
     file = './' + train_or_test + '_ds' + add_random * '_w_random' + '.pickle'
     if os.path.isfile('./' + file):
-        pickle_in = open('train_ds_w_random.pickle', 'rb')
+        pickle_in = open(file, 'rb')
         dataset = pickle.load(pickle_in)
         return shuffle_dataset(dataset)
     else:
