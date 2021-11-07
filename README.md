@@ -1,6 +1,6 @@
 # Interactive Multilayer Perceptron
 
-This projects runs and visualizes the training of a multilayer perceptron (unsurprisingly, on the MNIST digits dataset). It is built from scratch using only numpy for all network functions and pygame for the visualization.
+This project runs and visualizes the training of a multilayer perceptron (unsurprisingly, on the MNIST digits dataset). It is built from scratch using only numpy for all network functions and pygame for the visualization.
 
 ![alt-text](https://i.im.ge/2021/11/06/otnlJm.gif)
 
