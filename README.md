@@ -8,5 +8,13 @@ The setup.py file can be tweaked to vary the network's architecture, learning ra
 
 # Requirements
 
+idx2numpy</br>
 numpy</br>
 pygame
+
+# Usage
+
+`git clone https://github.com/E-Fumi/InteractiveMultiLayerPerceptron.git`</br>
+`cd InteractiveMultiLayerPerceptron`</br>
+`pip install -r requirements.txt`</br>
+`python main.py`
