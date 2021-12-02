@@ -13,7 +13,7 @@ The setup.py file can be tweaked to vary the network's architecture, learning ra
 python 3.x</br>
 idx2numpy</br>
 numpy</br>
-pygame
+pygame</br>
 
 ## Usage
 
